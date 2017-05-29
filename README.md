@@ -1,2 +1,2 @@
-# nginxDocker
-Nginx configuration using docker
+# ghost
+XergioAleX Ghost Blog Configuration
