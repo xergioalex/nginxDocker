@@ -4,6 +4,7 @@
 # Create envs vars if don't exist
 ENV_FILES=("docker-compose.yaml" ".env" "nginx/site.template" "nginx/site.template.ssl")
 utils.check_envs_files "${ENV_FILES[@]}"
+utils.get_host_ip
 
 # Load environment vars, to use from console, run follow command: 
 utils.load_environment 
