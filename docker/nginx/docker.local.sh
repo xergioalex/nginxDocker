@@ -12,11 +12,21 @@ utils.load_environment
 if [[ "$1" == "config" ]]; then
     utils.printer "Set nginx configuration..."
     mkdir -p /opt/nginx/config/
-    cp nginx/site.template /opt/nginx/config/default.conf
+    if [[ "$2" == "secure" ]]; then
+        cp nginx/site.template.ssl /opt/nginx/config/default.conf
+    else
+        cp nginx/site.template /opt/nginx/config/default.conf
+    fi
     utils.printer "Creating logs files..."
     mkdir -p /opt/nginx/logs/
     touch /opt/nginx/logs/site.access
     touch /opt/nginx/logs/site.error
+    if [[ "$2" == "secure" ]]; then
+        utils.printer "Stopping nginx machine if it's running..."
+        docker-compose stop nginx
+        utils.printer "Creating letsencrypt certifications files..."
+        docker-compose up certbot
+    fi
 elif [[ "$1" == "deploy" ]]; then
     utils.printer "Starting nginx machine..."
     docker-compose up -d nginx
