@@ -64,7 +64,7 @@ elif [[ "$1" == "stop" ]]; then
     docker-compose stop nginx
 elif [[ "$1" == "up" ]]; then
     # Set initial configuration in server for nginx
-    bash docker.local.sh config
+    bash docker.local.sh config $2
     # Deploying services to remote machine server
     bash docker.local.sh deploy
 else
